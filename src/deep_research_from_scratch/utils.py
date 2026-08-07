@@ -39,7 +39,7 @@ def get_current_dir() -> Path:
 
 # ===== CONFIGURATION =====
 
-summarization_model = init_chat_model(model="openai:gpt-4.1-mini")
+summarization_model = init_chat_model(model="openai:gpt-5.4")
 tavily_client = TavilyClient()
 
 # ===== SEARCH FUNCTIONS =====
