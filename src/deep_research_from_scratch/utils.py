@@ -39,7 +39,7 @@ def get_current_dir() -> Path:
 
 # ===== CONFIGURATION =====
 
-summarization_model = init_chat_model(model="openai:gpt-5.4")
+summarization_model = init_chat_model(model="openai:gpt-5.6-luna")
 tavily_client = TavilyClient()
 
 # ===== SEARCH FUNCTIONS =====
@@ -86,7 +86,9 @@ def summarize_webpage_content(webpage_content: str) -> str:
     """
     try:
         # Set up structured output model for summarization
-        structured_model = summarization_model.with_structured_output(Summary)
+        structured_model = summarization_model.with_structured_output(
+            Summary, method="json_schema", strict=True
+        )
 
         # Generate summary
         summary = structured_model.invoke([

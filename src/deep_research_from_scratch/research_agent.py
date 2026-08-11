@@ -23,10 +23,10 @@ tools = [tavily_search, think_tool]
 tools_by_name = {tool.name: tool for tool in tools}
 
 # Initialize models
-model = init_chat_model(model="anthropic:claude-sonnet-4-6")
+model = init_chat_model(model="openai:gpt-5.6-luna")
 model_with_tools = model.bind_tools(tools)
-summarization_model = init_chat_model(model="openai:gpt-5.4")
-compress_model = init_chat_model(model="openai:gpt-5.4", max_tokens=32000) # model="anthropic:claude-sonnet-4-6", max_tokens=64000
+summarization_model = init_chat_model(model="openai:gpt-5.6-luna")
+compress_model = init_chat_model(model="openai:gpt-5.6-luna", max_tokens=32000)
 
 # ===== AGENT NODES =====
 

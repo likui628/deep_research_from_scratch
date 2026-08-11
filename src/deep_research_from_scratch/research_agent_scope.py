@@ -29,7 +29,7 @@ def get_today_str() -> str:
 # ===== CONFIGURATION =====
 
 # Initialize model
-model = init_chat_model(model="openai:gpt-5.4", temperature=0.0)
+model = init_chat_model(model="openai:gpt-5.6-luna", temperature=0.0)
 
 # ===== WORKFLOW NODES =====
 
@@ -41,7 +41,9 @@ def clarify_with_user(state: AgentState) -> Command[Literal["write_research_brie
     Routes to either research brief generation or ends with a clarification question.
     """
     # Set up structured output model
-    structured_output_model = model.with_structured_output(ClarifyWithUser)
+    structured_output_model = model.with_structured_output(
+        ClarifyWithUser, method="json_schema", strict=True
+    )
 
     # Invoke the model with clarification instructions
     response = structured_output_model.invoke([
@@ -71,7 +73,9 @@ def write_research_brief(state: AgentState):
     and contains all necessary details for effective research.
     """
     # Set up structured output model
-    structured_output_model = model.with_structured_output(ResearchQuestion)
+    structured_output_model = model.with_structured_output(
+        ResearchQuestion, method="json_schema", strict=True
+    )
 
     # Generate research brief from conversation history
     response = structured_output_model.invoke([
